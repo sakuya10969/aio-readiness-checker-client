@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { AppShell, Container, Title, Text, Stack, Divider } from "@mantine/core"
+import { useState } from "react"
+import axios from "axios"
 
-function App() {
-  const [count, setCount] = useState(0)
+import type { ResultRow } from "@/types"
+import { UrlInputForm } from "@/components/UrlInputForm"
+import { ResultsTable } from "@/components/ResultsTable"
+import { ResultReports } from "@/components/ResultReports"
+
+export default function App() {
+  const [urlsText, setUrlsText] = useState<string>("")
+  const [results, setResults] = useState<ResultRow[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const handleAnalyze = async () => {
+    setLoading(true)
+    try {
+      const res = await axios.post<ResultRow[]>("/api/aio-check", {
+        urls: urlsText.split("\n").map((u) => u.trim()).filter(Boolean),
+      })
+      const data = res.data
+      setResults(data)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <AppShell padding="md" style={{ minHeight: "100vh", background: "#fafbfc" }}>
+      <Container
+        size="xl"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          minHeight: "80vh",
+        }}
+      >
+        <Stack gap="md" style={{ marginTop: "6vh", marginBottom: "6vh" }}>
+          <Title order={2} ta="center" mb="xs">
+            AIO Readiness Checker（デモ版）
+          </Title>
+          <Text c="dimmed" ta="center">
+            URLを入力すると、AI検索時代のコンテンツ適性を簡易スコアリングします。
+          </Text>
+
+          <UrlInputForm
+            urlsText={urlsText}
+            loading={loading}
+            onUrlsChange={setUrlsText}
+            onAnalyze={handleAnalyze}
+          />
+
+          {results.length > 0 && (
+            <>
+              <Divider />
+              <ResultsTable results={results} />
+              <Divider />
+              <ResultReports results={results} />
+            </>
+          )}
+        </Stack>
+      </Container>
+    </AppShell>
   )
 }
-
-export default App
