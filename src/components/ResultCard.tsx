@@ -6,7 +6,7 @@ type ResultCardProps = {
   result: ResultRow
 }
 
-export function ResultCard({ result }: ResultCardProps) {
+export const ResultCard = ({ result }: ResultCardProps) => {
   return (
     <Paper withBorder p="md">
       <Title order={5}>{result.url}</Title>
@@ -21,10 +21,10 @@ export function ResultCard({ result }: ResultCardProps) {
         </Table.Thead>
         <Table.Tbody>
           {[
-            ["Crawl/Index健全性", result.crawlIndex],
+            ["Crawl/Index健全性", result.crawl_index],
             ["回答性", result.answerability],
             ["信頼性", result.reliability],
-            ["構造化データ", result.structuredData],
+            ["構造化データ", result.structured_data],
             ["コンテンツ一貫性", result.consistency],
           ].map(([label, score]) => {
             const lv = getScoreLevel(Number(score))
@@ -41,11 +41,11 @@ export function ResultCard({ result }: ResultCardProps) {
         </Table.Tbody>
       </Table>
 
-      {result.llmReport && (
+      {result.llm_report && (
         <>
           <Divider my="sm" />
           <Text size="sm" style={{ whiteSpace: "pre-wrap" }}>
-            {result.llmReport}
+            {result.llm_report}
           </Text>
         </>
       )}
@@ -62,4 +62,3 @@ export function ResultCard({ result }: ResultCardProps) {
     </Paper>
   )
 }
-

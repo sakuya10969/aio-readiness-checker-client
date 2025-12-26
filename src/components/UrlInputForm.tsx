@@ -8,12 +8,12 @@ type UrlInputFormProps = {
   onAnalyze: () => void
 }
 
-export function UrlInputForm({
+export const UrlInputForm = ({
   urlsText,
   loading,
   onUrlsChange,
   onAnalyze,
-}: UrlInputFormProps) {
+}: UrlInputFormProps) => {
   return (
     <>
       <Textarea
@@ -36,4 +36,3 @@ export function UrlInputForm({
     </>
   )
 }
-

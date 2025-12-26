@@ -6,7 +6,7 @@ type ResultReportsProps = {
   results: ResultRow[]
 }
 
-export function ResultReports({ results }: ResultReportsProps) {
+export const ResultReports = ({ results }: ResultReportsProps) => {
   return (
     <>
       <Title order={3}>自動示唆（AI生成レポート）</Title>
@@ -19,4 +19,3 @@ export function ResultReports({ results }: ResultReportsProps) {
     </>
   )
 }
-

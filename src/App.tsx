@@ -3,9 +3,7 @@ import { useState } from "react"
 import axios from "axios"
 
 import type { ResultRow } from "@/types"
-import { UrlInputForm } from "@/components/UrlInputForm"
-import { ResultsTable } from "@/components/ResultsTable"
-import { ResultReports } from "@/components/ResultReports"
+import { UrlInputForm, ResultsTable, ResultReports } from "@/components"
 
 export default function App() {
   const [urlsText, setUrlsText] = useState<string>("")
