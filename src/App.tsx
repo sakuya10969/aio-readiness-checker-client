@@ -15,7 +15,7 @@ export default function App() {
   const handleAnalyze = async () => {
     setLoading(true)
     try {
-      const res = await axios.post<ResultRow[]>("/api/aio-check", {
+      const res = await axios.post<ResultRow[]>("/aio-check", {
         urls: urlsText.split("\n").map((u) => u.trim()).filter(Boolean),
       })
       const data = res.data
