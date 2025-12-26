@@ -20,7 +20,7 @@ export const UrlInputForm = ({
         label="診断したいURL（1行に1つ）"
         placeholder="https://example.com"
         minRows={10}
-        styles={{ input: { minHeight: 150, fontSize: 16 } }}
+        styles={{ input: { minHeight: 100, fontSize: 16 } }}
         value={urlsText}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
           onUrlsChange(e.currentTarget.value)
