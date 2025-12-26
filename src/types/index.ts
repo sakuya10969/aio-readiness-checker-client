@@ -10,3 +10,8 @@ export interface ResultRow {
     summary?: string
     llm_report?: string
   }
+
+  export interface AioCheckResponse {
+    results: ResultRow[]
+  }
+  
