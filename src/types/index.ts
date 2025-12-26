@@ -1,12 +1,12 @@
 export interface ResultRow {
     url: string
     status: string
-    totalScore: number
-    crawlIndex: number
+    total_score: number
+    crawl_index: number
     answerability: number
     reliability: number
-    structuredData: number
+    structured_data: number
     consistency: number
     summary?: string
-    llmReport?: string
+    llm_report?: string
   }
