@@ -1,6 +1,6 @@
 import { Title, Text, Stack, Paper } from "@mantine/core"
 
-export function MetricsExplanation() {
+export const MetricsExplanation = () => {
   return (
     <>
       <Title order={3}>各指標の意味（AIO時代における重要性）</Title>
@@ -64,4 +64,3 @@ export function MetricsExplanation() {
     </>
   )
 }
-
