@@ -1,4 +1,4 @@
-import { Title, Table, Badge, Divider, Text, Button, Paper } from "@mantine/core"
+import { Title, Table, Divider, Text, Button, Paper } from "@mantine/core"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { useRef } from "react"
@@ -61,9 +61,7 @@ export const ResultCard = ({ result }: ResultCardProps) => {
                 <Table.Tr key={label}>
                   <Table.Td>{label}</Table.Td>
                   <Table.Td>{score}</Table.Td>
-                  <Table.Td>
-                    <Badge color={lv.color}>{lv.label}</Badge>
-                  </Table.Td>
+                  <Table.Td fw={600} c={lv.color}>{lv.label}</Table.Td>
                 </Table.Tr>
               )
             })}
@@ -209,7 +207,7 @@ export const ResultCard = ({ result }: ResultCardProps) => {
       </div>
       <Button
         mt="sm"
-        variant="light"
+        variant="outline"
         onClick={handleDownloadPDF}
       >
         PDFレポートをダウンロード
