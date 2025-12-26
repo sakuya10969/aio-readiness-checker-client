@@ -2,8 +2,8 @@ import { AppShell, Container, Title, Text, Stack, Divider } from "@mantine/core"
 import { useState } from "react"
 import axios from "axios"
 
-import type { ResultRow } from "@/types"
-import { UrlInputForm, ResultsTable, ResultReports } from "@/components"
+import type { ResultRow, AioCheckResponse } from "@/types"
+import { UrlInputForm, ResultsTable, ResultReports, MetricsExplanation } from "@/components"
 
 export default function App() {
   const [urlsText, setUrlsText] = useState<string>("")
@@ -13,15 +13,16 @@ export default function App() {
   const handleAnalyze = async () => {
     setLoading(true)
     try {
-      const res = await axios.post<ResultRow[]>("/aio-check", {
+      const res = await axios.post<AioCheckResponse>(`${import.meta.env.VITE_API_URL}/aio-check`, {
         urls: urlsText.split("\n").map((u) => u.trim()).filter(Boolean),
       })
-      const data = res.data
+      const data = res.data.results
       setResults(data)
     } catch (e) {
       console.error(e)
     } finally {
       setLoading(false)
+      setUrlsText("") // 入力完了後にテキストエリアをクリア
     }
   }
 
@@ -55,6 +56,8 @@ export default function App() {
             <>
               <Divider />
               <ResultsTable results={results} />
+              <Divider />
+              <MetricsExplanation />
               <Divider />
               <ResultReports results={results} />
             </>
