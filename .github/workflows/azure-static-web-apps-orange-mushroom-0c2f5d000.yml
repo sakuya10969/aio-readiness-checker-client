@@ -26,7 +26,7 @@ jobs:
           node-version: "22"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build (inject VITE_API_URL)
         env:
@@ -39,9 +39,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_MUSHROOM_0C2F5D000 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"
+          app_location: "dist"
+          output_location: ""
           api_location: ""
-          output_location: "dist"
           skip_app_build: true
 
   close_pull_request_job:
